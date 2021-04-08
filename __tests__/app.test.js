@@ -42,5 +42,49 @@ describe('model-controller-lab routes', () => {
     }]);
   });
 
+  it('gets a bird by id', async () => {
+    const res = await request(app)
+    .get('/api/v1/birds/1');
+
+    expect(res.body).toEqual({
+      "id": "1", 
+      "name": "eagle",
+      "age": 3,
+      "color": "golden"
+    });
+  });
+
+  it('updates bird info in database', async () => {
+    
+    
+    const res = await request(app)
+    .put('/api/v1/birds/1')
+    .send({ 
+      "id": "1", 
+      "name": "chicken",
+      "age": 3,
+      "color": "golden"
+    });
+
+    expect(res.body).toEqual({
+      "id": "1", 
+      "name": "chicken",
+      "age": 3,
+      "color": "golden"
+    });
+  });
+
+  it('deletes a bird by id', async () => {
+    const res = await request(app)
+    .delete('/api/v1/birds/1')
+
+    expect(res.body).toEqual({
+      "id": "1", 
+      "name": "eagle",
+      "age": 3,
+      "color": "golden"
+    });
+  });
+
 
 });
